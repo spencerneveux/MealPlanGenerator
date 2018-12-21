@@ -25,7 +25,7 @@ public class MealPlanGenerator {
                         double proteinAmount = input.nextDouble();
                         ProteinFactory proteinFactory = new ProteinFactory();
                         meal = proteinFactory.addProtein(proteinInput, proteinAmount);
-                        System.out.println("Meal 1: " + meal.getDescription() + "\nProtein: " + meal.getProtein() + "g\nCarbs: " + meal.getCarbs() + "g\nFats: " + meal.getFats() + "g");
+                        System.out.println("Meal: " + meal.getDescription() + "\nProtein: " + meal.getProtein() + "g\nCarbs: " + meal.getCarbs() + "g\nFats: " + meal.getFats() + "g");
                         break;
                     case 2:
                         System.out.println(carbMenu());
@@ -34,7 +34,7 @@ public class MealPlanGenerator {
                         double carbAmount = input.nextDouble();
                         CarbFactory carbFactory = new CarbFactory();
                         meal = carbFactory.addCarbs(carbInput, carbAmount);
-                        System.out.println("Meal 1: " + meal.getDescription() + "\nProtein: " + meal.getProtein() + "g\nCarbs: " + meal.getCarbs() + "g\nFats: " + meal.getFats() + "g");
+                        System.out.println("Meal: " + meal.getDescription() + "\nProtein: " + meal.getProtein() + "g\nCarbs: " + meal.getCarbs() + "g\nFats: " + meal.getFats() + "g");
                         break;
                     case 3:
                         System.out.println(fatMenu());
