@@ -4,5 +4,4 @@ interface Meal {
     double getProtein();
     double getCarbs();
     double getFats();
-
 }

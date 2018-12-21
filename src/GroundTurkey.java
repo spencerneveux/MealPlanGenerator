@@ -3,6 +3,11 @@ public class GroundTurkey extends MealDecorator {
     private final double FAT_OZ = 3.0;
     private double amount;
 
+    public GroundTurkey(Meal newMeal) {
+        super(newMeal);
+        System.out.println("Adding Ground Turkey");
+    }
+
     public GroundTurkey(Meal newMeal, double amount) {
         super(newMeal);
         this.amount = amount;

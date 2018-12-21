@@ -3,6 +3,11 @@ public class Chicken extends MealDecorator{
     private final double FAT_OZ = 1.0;
     private double amount;
 
+    public Chicken(Meal newMeal) {
+        super(newMeal);
+        System.out.println("Adding Chicken");
+    }
+
     public Chicken (Meal newMeal, double amount) {
         super(newMeal);
         this.amount = amount;
@@ -30,4 +35,5 @@ public class Chicken extends MealDecorator{
         double totalFat = amount * FAT_OZ;
         return tempMeal.getFats() + totalFat;
     }
+
 }

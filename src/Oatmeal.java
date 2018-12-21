@@ -33,4 +33,5 @@ public class Oatmeal extends MealDecorator {
         double totalFat = amount * FAT_QCUP;
         return tempMeal.getFats() + totalFat;
     }
+
 }

@@ -3,7 +3,6 @@ public class PlainMeal implements Meal {
     public String getDescription() {
         return "";
     }
-
     @Override
     public double getCalories() {
         return 0;
@@ -23,4 +22,5 @@ public class PlainMeal implements Meal {
     public double getFats() {
         return 0;
     }
+
 }
