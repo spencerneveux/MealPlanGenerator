@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MealPlanGenerator {
@@ -12,34 +13,90 @@ public class MealPlanGenerator {
 
             // Decide what Main Menu Option
             if (userInput == 1) {
-                System.out.println(customMealPlanMenu());
-                int secondUserInput = input.nextInt();
-                Meal meal = null;
+                // Custom Meal option
+                int secondUserInput;
+                Meal meal = new PlainMeal();
 
-                // Determine what type of macro to choose from
-                switch (secondUserInput) {
-                    case 1:
-                        System.out.println(proteinMenu());
-                        int proteinInput = input.nextInt();
-                        System.out.println("Amount(oz): ");
-                        double proteinAmount = input.nextDouble();
-                        ProteinFactory proteinFactory = new ProteinFactory();
-                        meal = proteinFactory.addProtein(proteinInput, proteinAmount);
-                        System.out.println("Meal: " + meal.getDescription() + "\nProtein: " + meal.getProtein() + "g\nCarbs: " + meal.getCarbs() + "g\nFats: " + meal.getFats() + "g");
-                        break;
-                    case 2:
-                        System.out.println(carbMenu());
-                        int carbInput = input.nextInt();
-                        System.out.println("Amount(1/4 cups): ");
-                        double carbAmount = input.nextDouble();
-                        CarbFactory carbFactory = new CarbFactory();
-                        meal = carbFactory.addCarbs(carbInput, carbAmount);
-                        System.out.println("Meal: " + meal.getDescription() + "\nProtein: " + meal.getProtein() + "g\nCarbs: " + meal.getCarbs() + "g\nFats: " + meal.getFats() + "g");
-                        break;
-                    case 3:
-                        System.out.println(fatMenu());
-                        break;
-                }
+                //Creat arraylist of meals
+                ArrayList<Meal> meals = new ArrayList<>();
+
+                do {
+                    //Print out options for custom meal
+                    System.out.println(customMealPlanMenu());
+                    secondUserInput = input.nextInt();
+
+                    // Determine what type of macro to choose from
+                    switch (secondUserInput) {
+                        case 1:
+                            //Display Protein menu and collect user input
+                            System.out.println(proteinMenu());
+                            int proteinInput = input.nextInt();
+
+                            //If user enters 5 exit protein menu
+                            if (proteinInput == 5)
+                                break;
+
+                            //Collect amount of protein chosen
+                            System.out.println("Amount(oz): ");
+                            double proteinAmount = input.nextDouble();
+
+                            //Generate protein factory and add choice to meal
+                            ProteinFactory proteinFactory = new ProteinFactory();
+                            meal = proteinFactory.addProtein(proteinInput, proteinAmount, meal);
+                            System.out.println("\nMeal\n"  + "Protein: " + meal.getProtein() + "g Carbs: "
+                                    + meal.getCarbs() + "g Fats: " + meal.getFats() + "g\n" + meal.getDescription() +"\n");
+                            break;
+                        case 2:
+                            //Display Carb menu and collect user input
+                            System.out.println(carbMenu());
+                            int carbInput = input.nextInt();
+
+                            //If user enters exit carb menu
+                            if (carbInput == 5)
+                                break;
+
+                            //Collect amount of carbs chosen
+                            System.out.println("Amount(Grams): ");
+                            double carbAmount = input.nextDouble();
+
+                            //Generate Carb factory and add choice to meal
+                            CarbFactory carbFactory = new CarbFactory();
+                            meal = carbFactory.addCarbs(carbInput, carbAmount, meal);
+                            System.out.println("\nMeal\n"  + "Protein: " + meal.getProtein() + "g Carbs: "
+                                    + meal.getCarbs() + "g Fats: " + meal.getFats() + "g\n" + meal.getDescription() + "\n");
+                            break;
+                        case 3:
+                            //Display Fat menu and collect user input
+                            System.out.println(fatMenu());
+                            int fatInput = input.nextInt();
+
+                            //If user enters exit, break
+                            if (fatInput == 5)
+                                break;
+
+                            //Collect amount of fat chosen
+                            System.out.println("Amount(Grams): ");
+                            double fatAmount = input.nextDouble();
+
+                            //Generate Fat Factory and add choice to meal
+                            FatFactory fatFactory = new FatFactory();
+                            meal = fatFactory.addFat(fatInput, fatAmount, meal);
+                            System.out.println("\nMeal\n"  + "Protein: " + meal.getProtein() + "g Carbs: "
+                                    + meal.getCarbs() + "g Fats: " + meal.getFats() + "g\n" + meal.getDescription() + "\n");
+                            break;
+                        case 4:
+                            System.out.println("Adding to Meal Plan");
+                            meals.add(meal);
+                            meal = new PlainMeal();
+                            int index = 1;
+                            for (Meal food : meals) {
+                                System.out.println("\nMeal " + index + ": " + "Protein: " + food.getProtein() + "g Carbs: "
+                                        + food.getCarbs() + "g Fats: " + food.getFats() + "g\n" + food.getDescription());
+                                index++;
+                            }
+                            break;
+                    }
+                }while (secondUserInput != 5);
             }
             else if (userInput == 2) {
                 System.out.println("Let's get some user input first!");
@@ -64,9 +121,6 @@ public class MealPlanGenerator {
                 System.out.println(mealPlanFactory);
             }
         }while (userInput != 3);
-
-        Meal meal_1 = new Oatmeal(new Chicken(new PlainMeal(), 4.0), 1);
-        System.out.println("Meal 1: " + meal_1.getDescription() + "\nProtein: " + meal_1.getProtein() + "g\nCarbs: " + meal_1.getCarbs() + "g\nFats: " + meal_1.getFats() + "g");
     }
 
 
@@ -84,7 +138,7 @@ public class MealPlanGenerator {
      * @return String of menu options
      */
     public static String customMealPlanMenu() {
-        String menu = "1) Protein\n2) Carbs\n3) Fats\n4) Exit";
+        String menu = "1) Protein\n2) Carbs\n3) Fats\n4) Enter Meal\n5) Exit";
         return menu;
     }
 
@@ -99,7 +153,7 @@ public class MealPlanGenerator {
     }
 
     public static String fatMenu() {
-        String menu = "1) Peanut Butter\n2) Olive Oil\n3) Avocado\n4) Nuts\n5) Exit";
+        String menu = "1) Peanut Butter\n2) Olive Oil\n3) Avocado\n4) Cashews\n5) Exit";
         return menu;
     }
 

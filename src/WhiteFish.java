@@ -1,21 +1,21 @@
-public class GroundTurkey extends MealDecorator {
-    private final double PROTEIN_OZ = 8.0;
-    private final double FAT_OZ = 3.0;
+public class WhiteFish extends MealDecorator{
+    private final double PROTEIN_OZ = 7.5;
+    private final double FAT_OZ = .75;
     private double amount;
 
-    public GroundTurkey(Meal newMeal) {
+    public WhiteFish(Meal newMeal) {
         super(newMeal);
-        System.out.println("Adding Ground Turkey");
+        System.out.println("Adding White Fish");
     }
 
-    public GroundTurkey(Meal newMeal, double amount) {
+    public WhiteFish (Meal newMeal, double amount) {
         super(newMeal);
         this.amount = amount;
-        System.out.println("Adding Ground Turkey");
+        System.out.println("Adding White Fish");
     }
 
     public String getDescription() {
-        return tempMeal.getDescription() + "Ground Turkey " + amount + "oz|";
+        return tempMeal.getDescription() + "White Fish: " + amount + "oz|";
     }
 
     public double getCalories() {

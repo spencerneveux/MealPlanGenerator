@@ -1,13 +1,15 @@
 public class ProteinFactory {
 
-    public Meal addProtein(int proteinType, double amount) {
+    public Meal addProtein(int proteinType, double amount, Meal meal) {
 
         if (proteinType == 1)
-            return new Chicken(new PlainMeal(), amount);
-
+            return new Chicken(meal, amount);
         else if (proteinType == 2)
-            return new GroundTurkey(new PlainMeal(), amount);
-
+            return new GroundTurkey(meal, amount);
+        else if (proteinType == 3)
+            return new WhiteFish(meal, amount);
+        else if (proteinType == 4)
+            return new Beef(meal, amount);
         else return null;
     }
 }

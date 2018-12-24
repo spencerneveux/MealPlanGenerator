@@ -1,18 +1,18 @@
-public class Oatmeal extends MealDecorator {
-    private final double PROTEIN_GRAM = .024;
-    private final double CARB_GRAM = .12;
-    private final double FAT_GRAM = 0.014;
+public class Potato extends MealDecorator {
+    private final double PROTEIN_GRAM = .02;
+    private final double CARB_GRAM = .17;
+    private final double FAT_GRAM = 0.0;
     private double amount;
 
-    public Oatmeal(Meal newMeal, double amount) {
+    public Potato(Meal newMeal, double amount) {
         super(newMeal);
         this.amount = amount;
-        System.out.println("Adding Oatmeal");
+        System.out.println("Adding Potato");
     }
 
 
     public String getDescription() {
-        return tempMeal.getDescription() + "Oatmeal: " + amount + " Grams|";
+        return tempMeal.getDescription() + "Potato: " + amount + " Grams|";
     }
 
     public double getCalories() {
@@ -33,5 +33,4 @@ public class Oatmeal extends MealDecorator {
         double totalFat = amount * FAT_GRAM;
         return tempMeal.getFats() + totalFat;
     }
-
 }

@@ -15,7 +15,7 @@ public class Chicken extends MealDecorator{
     }
 
     public String getDescription() {
-        return tempMeal.getDescription() + "Chicken ";
+        return tempMeal.getDescription() + "Chicken: " + amount + "oz|";
     }
 
     public double getCalories() {
