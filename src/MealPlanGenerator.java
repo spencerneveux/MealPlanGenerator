@@ -33,7 +33,7 @@ public class MealPlanGenerator {
                             int proteinInput = input.nextInt();
 
                             //If user enters 5 exit protein menu
-                            if (proteinInput == 5)
+                            if (proteinInput == 6)
                                 break;
 
                             //Collect amount of protein chosen
@@ -119,6 +119,7 @@ public class MealPlanGenerator {
                 MealPlanFactory mealPlanFactory = new MealPlanFactory();
                 mealPlanFactory.createMealPlan(client);
                 System.out.println(mealPlanFactory);
+                mealPlanFactory.createMeals(6);
             }
         }while (userInput != 3);
     }
@@ -129,7 +130,7 @@ public class MealPlanGenerator {
      * @return String representing main menu
      */
     public static String mainMenu() {
-        String menu = "Welcome to Meal Plan Generator!\n1) Custom Meal Plan\n2) Generate Meal Plan\n3) Exit";
+        String menu = "\nWelcome to Meal Plan Generator!\n1) Custom Meal Plan\n2) Generate Meal Plan\n3) Exit";
         return menu;
     }
 
@@ -143,7 +144,7 @@ public class MealPlanGenerator {
     }
 
     public static String proteinMenu() {
-        String menu = "1) Chicken Breast\n2) Lean Ground Turkey\n3) White Fish\n4) Lean Beef\n5) Exit";
+        String menu = "1) Chicken Breast\n2) Lean Ground Turkey\n3) White Fish\n4) Lean Beef\n5) Whole Egg\n6) Exit";
         return menu;
     }
 

@@ -10,6 +10,8 @@ public class ProteinFactory {
             return new WhiteFish(meal, amount);
         else if (proteinType == 4)
             return new Beef(meal, amount);
+        else if (proteinType == 5)
+            return new WholeEgg(meal, amount);
         else return null;
     }
 }

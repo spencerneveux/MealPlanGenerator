@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 public class MealPlanFactory {
+    private ArrayList<Meal> meals = new ArrayList<>();
     private double protein;
     private double carbs;
     private double fats;
@@ -6,8 +9,6 @@ public class MealPlanFactory {
     private double calories;
 
     public void createMealPlan(Client client) {
-        Meal meal = null;
-
         // Determine BMR
         if (client.getGender().equals("male")) {
             bmrCalories = 66 + (6.23 * client.getWeight()) + (12.7 * client.getHeight() * 12) - (6.76 * client.getAge());
@@ -45,9 +46,47 @@ public class MealPlanFactory {
         }
     }
 
+
+    public void createMeals(int numMeals) {
+        //Determine macro per meal
+        double proteinPerMeal = protein / numMeals;
+        double carbPerMeal = carbs / numMeals;
+        double fatPerMeal = fats / numMeals;
+
+        //Create a factories
+        ProteinFactory proteinFactory = new ProteinFactory();
+        CarbFactory carbFactory = new CarbFactory();
+        FatFactory fatFactory = new FatFactory();
+
+        //Create the number of meals from param list
+        for (int i = 0; i < numMeals; i++) {
+            meals.add(new PlainMeal());
+        }
+
+        // Run through each meal and add appropriate macros
+        for (int i = 0; i < meals.size(); i++) {
+
+            // Create random number to choose food
+            int randNum = (int)(Math.random()*4 + 1);
+
+            Meal tempMeal = new PlainMeal();
+            tempMeal = proteinFactory.addProtein(randNum, 6, tempMeal);
+            tempMeal = carbFactory.addCarbs(randNum, 100, tempMeal);
+            meals.set(i, tempMeal);
+        }
+
+        // Display Each meal
+        int index = 1;
+        for (Meal food : meals) {
+            System.out.println("\nMeal " + index + ": " + "Protein: " + food.getProtein() + "g Carbs: "
+                    + food.getCarbs() + "g Fats: " + food.getFats() + "g\n" + food.getDescription());
+            index++;
+        }
+
+    }
+
     @Override
     public String toString() {
         return (String.format("Calories: %.2f Protein: %.2f Carbs: %.2f Fats: %.2f", calories, protein, carbs, fats));
     }
-
 }
